@@ -5,6 +5,7 @@ LABEL description="A simple webservice that provides the answer to the universes
 LABEL documentation="https://github.com/JayeHicks/webservice/blob/main/README.md"
 LABEL version="1.0.0"
 
+COPY README.md /docs/
 
 WORKDIR /app
 ADD Gemfile /app/Gemfile

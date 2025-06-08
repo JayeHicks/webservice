@@ -1,0 +1,31 @@
+name: Test Webservice
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-webservice:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Build Docker image
+      run: docker build -t my-webservice .
+    
+    - name: Run container
+      run: |
+        docker run -d -p 8001:4567 --name test-service my-webservice
+        sleep 5  # Give container time to start
+    
+    - name: Test website is accessible
+      run: |
+        curl -f http://localhost:8001 || exit 1
+        echo "Webservice is running successfully!"
+    
+    - name: Stop container
+      run: docker stop test-service

@@ -1,5 +1,11 @@
 FROM ruby:3.0.2
 
+LABEL maintainer="jaye.hicks@gmail.com"
+LABEL description="A simple webservice that provides the answer to the universes ultimate question"
+LABEL documentation="https://github.com/JayeHicks/webservice/blob/main/README.md"
+LABEL version="1.0.0"
+
+
 WORKDIR /app
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
@@ -11,7 +17,3 @@ RUN bundle install --system
 EXPOSE 4567
 
 CMD ["ruby", "app.rb"]
-
-# Build container with: docker build -t my-web-service-image .
-# Launch container with: docker run -d --name my-web-service -p 8001:4567 my-web-service-image:latest
-# View page running in containe using http://localhost:8001 or http://127.0.0.1:8001
